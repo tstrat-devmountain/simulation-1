@@ -4,9 +4,6 @@ import missingImage from '../../media/missing_image.png';
 import Product from '../Product/Product';
 
 class Dashboard extends Component {
-    constructor() {
-        super();
-    }
 
     handleBadImage = (ev) => {
         ev.target.src = missingImage;
@@ -14,7 +11,12 @@ class Dashboard extends Component {
 
     render() {
         const productList = this.props.inventory
-            .map((p,i) => <Product key={i} name={p.name} price={p.price} img={p.img} badImage={this.handleBadImage}/>);
+            .map((p,i) => <Product 
+                            key={i} 
+                            {...p} 
+                            badImage={this.handleBadImage}
+                            select={this.props.select}
+                            delete={this.props.delete}/>);
 
         return (
             <div className="dashboard">

@@ -11,10 +11,13 @@ class App extends Component {
   constructor() {
     super();
     this.state={
-      inventory:[]
+      inventory:[],
+      selected: {}
     }
     this.submit = this.submit.bind(this);
     this.fetchInventory = this.fetchInventory.bind(this);
+    this.deleteProduct = this.deleteProduct.bind(this);
+    this.editProduct = this.editProduct.bind(this);
   }
 
   componentDidMount() {
@@ -35,13 +38,36 @@ class App extends Component {
     }))
   }
 
+  deleteProduct = (id) => {
+    axios.delete(`/api/product/${id}`)
+    .then(() => 
+        this.fetchInventory()
+    );
+  }
+
+  selectProduct = (product) => {
+    this.setState({
+      selected: product
+    })
+  }
+
+  editProduct = (id, edits) => {
+    axios.put(`/api/product/${id}`, edits)
+    .then(() => {
+      this.setState({ selected: {}})
+      this.fetchInventory();
+      }
+    )
+  }
+
   render() {
+    console.log({selected: this.state.selected});
     return (
       <div className="App">
         <Header />
         <main>
-          <Dashboard inventory={this.state.inventory}/>
-          <Form submit={this.submit}/>
+          <Dashboard inventory={this.state.inventory} delete={this.deleteProduct} select={this.selectProduct}/>
+          <Form selected={this.state.selected} submit={this.submit} edit={this.editProduct}/>
         </main>
       </div>
     );
