@@ -1,0 +1,31 @@
+.form {
+    width: 30%;
+
+    border: 1px solid blue;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form input, .form h2, .buttonControls {
+    margin:1%;
+    width: 90%;
+}
+
+.formImg {
+    max-width: 100%;
+}
+
+/* Hide HTML5 Up and Down arrows. */
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.buttonControls {
+    width: 80%;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}

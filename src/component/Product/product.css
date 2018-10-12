@@ -1,7 +1,9 @@
 .product {
-    padding: 10px;
-    margin: 10px;
-    min-width: 10%;
+    padding: 2%;
+    margin: 5%;
+    width: 100%;
+    height:300px;
+
     display:flex;
     justify-content: space-around;
     align-items: flex-start;
@@ -9,9 +11,16 @@
 }
 
 .product > * {
-    margin: 50px;
+    height: 80%;
+    margin: 5%;
+    border: 2px solid purple;
 }
 
+.product > div > * {
+    margin: 20px;
+}
 .productImg {
-    max-height: 90%;
+    margin:0;
+    height: 100%;
+    border: 1px solid black;
 }

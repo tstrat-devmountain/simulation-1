@@ -1,10 +1,11 @@
 import React, { Component } from "react"
 import axios from 'axios';
+import missingImage from '../../media/missing_image.png';
 
 import Product from '../Product/Product';
 
 class Dashboard extends Component {
-constructor() {
+    constructor() {
         super()
         this.state= {
             products: []
@@ -20,14 +21,16 @@ constructor() {
         
     }
 
+    handleBadImage = (ev) => {
+        ev.target.src = missingImage;
+    }
 
     render() {
         const productList = this.state.products
-            .map((p,i) => <Product key={i} name={p.name} price={p.price} img={p.img}/>);
+            .map((p,i) => <Product key={i} name={p.name} price={p.price} img={p.img} badImage={this.handleBadImage}/>);
 
         return (
-            <div>
-                Dashboard
+            <div className="dashboard">
                 {productList}
             </div>
     )}
