@@ -17,7 +17,10 @@ massive(process.env.CONNECTION_STRING)
 
 /* ENDPOINTS */
 app.get('/api/inventory', controller.getProducts);
+
 app.post('/api/product', controller.createProduct);
+
+app.get('/api/product/:id', controller.getProduct);
 app.put('/api/product/:id', controller.updateProduct);
 app.delete('/api/product/:id', controller.deleteProduct);
 

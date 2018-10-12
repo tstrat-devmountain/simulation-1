@@ -9,7 +9,7 @@ export default function Header(props)  {
             <img alt="Shelfie Logo" src={shelfieIcon}/>
             <h1>SHELFIE</h1>
             <NavLink to="/">Dashboard</NavLink>
-            <NavLink to="/">Add Inventory</NavLink>
+            <NavLink to="/add">Add Inventory</NavLink>
         </div>
     )
 }

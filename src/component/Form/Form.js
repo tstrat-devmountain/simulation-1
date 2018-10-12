@@ -1,26 +1,36 @@
 import React, { Component } from "react"
-
+import axios from 'axios';
 import missingImage from '../../media/missing_image.png';
 import './form.css';
 class Form extends Component {
     constructor() {
         super()
         this.state= {
+            id: undefined,
             img : '',
             name: '',
             price: 0
         };
     }
 
-    componentDidUpdate = (newProps) => {
-        if (newProps !== this.props)
-        if (this.props.selected.id) {
-            const { img, name, price } = this.props.selected;
-            this.setState({
-                img,
-                name,
-                price
+    componentDidMount = () => {
+        if (this.props.match.params.id) {
+            axios.get(`/api/product/${this.props.match.params.id}`)
+            .then(res => {
+                const { id, img, name, price } = res.data;
+                this.setState({
+                    id,
+                    img,
+                    name,
+                    price
+                })
             })
+            
+        }
+    }
+    componentDidUpdate = (newProps) => {
+        if (newProps !== this.props) {
+            this.clearInput();
         }
     }
 
@@ -62,19 +72,28 @@ class Form extends Component {
     })
 
     postData = () => {
-        this.props.submit(this.state);
+        axios.post('/api/product', this.state)
+        .then(() => {
+            this.fetchInventory();
+        })
         this.clearInput();
     }
 
     editData = (id) => {
-        this.props.edit(id, this.state)
+        axios.put(`/api/product/${id}`, this.state)
+        .then(() => {
+            this.setState({ selected: {}})
+            this.fetchInventory();
+        }
+    )
         this.clearInput();
     }
     
 
     render() {
+        console.log('stuff', this);
         const { img, name, price } = this.state;
-        const id = this.props.selected.id;
+        const id = this.state.id > 0 ? this.state.id : undefined;
         const submitBtn = id ? 
             <button onClick={()=>this.editData(id)}>Save Changes</button>:
             <button onClick={()=> this.postData() }>Add to Inventory</button>;

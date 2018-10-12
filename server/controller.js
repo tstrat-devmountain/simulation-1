@@ -1,4 +1,15 @@
 module.exports = {
+    getProduct : (req, res) => {
+        const db = req.app.get('db');  // get database
+        const { id } = req.params;
+        db.get_product({id})
+        .then( products => {
+            res.status(200).json(products[0]);
+        })
+        .catch( error => {
+            console.error("Error in getProduct (single) query: ", error);
+        })
+    },
     getProducts : (req, res) => {
         const db = req.app.get('db');  // get database
         db.get_products()
@@ -6,7 +17,7 @@ module.exports = {
             res.status(200).json(products);
         })
         .catch( error => {
-            console.error("Error in getProducts querry: ", error);
+            console.error("Error in getProducts query: ", error);
         })
     },
     createProduct : (req, res) => {
@@ -17,7 +28,7 @@ module.exports = {
             res.sendStatus(200);
         })
         .catch( error => {
-            console.error("Error in createProduct querry: ", error);
+            console.error("Error in createProduct query: ", error);
         })
     },
     updateProduct : (req, res) => {
@@ -29,7 +40,7 @@ module.exports = {
             res.sendStatus(200);
         })
         .catch( error => {
-            console.error("Error in updateProduct querry: ", error);
+            console.error("Error in updateProduct query: ", error);
         })
     },
     deleteProduct : (req, res) => {
@@ -40,7 +51,7 @@ module.exports = {
             res.sendStatus(200);
         })
         .catch( error => {
-            console.error("Error in deleteProduct querry: ", error);
+            console.error("Error in deleteProduct query: ", error);
         })
     }
 }
