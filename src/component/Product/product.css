@@ -1,0 +1,17 @@
+.product {
+    padding: 10px;
+    margin: 10px;
+    min-width: 10%;
+    display:flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    border: 1px solid red;
+}
+
+.product > * {
+    margin: 50px;
+}
+
+.productImg {
+    max-height: 90%;
+}
