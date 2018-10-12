@@ -18,6 +18,8 @@ massive(process.env.CONNECTION_STRING)
 /* ENDPOINTS */
 app.get('/api/inventory', controller.getProducts);
 app.post('/api/product', controller.createProduct);
+app.put('/api/product/:id', controller.updateProduct);
+app.delete('/api/product/:id', controller.deleteProduct);
 
 const SERVER_PORT = process.env.SERVER_PORT || 4000;
 app.listen(SERVER_PORT, () => console.log("Listening on port:", SERVER_PORT));
