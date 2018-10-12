@@ -11,7 +11,6 @@ module.exports = {
     },
     createProduct : (req, res) => {
         const db = req.app.get('db'); // get database
-        const {name, price, img} = req.body;  // if we need it just in case (remove if not)
 
         db.create_product(req.body)
         .then( () => {
@@ -19,6 +18,16 @@ module.exports = {
         })
         .catch( error => {
             console.error("Error in createProduct querry: ", error);
+        })
+    },
+    updateProduct : (req, res) => {
+        const db = req.app.get('db');
+        db.updateProduct(req.body)
+        .then( () => {
+            res.sendStatus(200);
+        })
+        .catch( error => {
+            console.error("Error in updateProduct querry: ", error);
         })
     }
 }

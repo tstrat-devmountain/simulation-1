@@ -1,24 +1,11 @@
 import React, { Component } from "react"
-import axios from 'axios';
 import missingImage from '../../media/missing_image.png';
 
 import Product from '../Product/Product';
 
 class Dashboard extends Component {
     constructor() {
-        super()
-        this.state= {
-            products: []
-        };
-    }
-
-    componentDidMount() {
-
-        axios.get('/api/inventory/')
-        .then(res => this.setState({
-            products: res.data
-        }))
-        
+        super();
     }
 
     handleBadImage = (ev) => {
@@ -26,7 +13,7 @@ class Dashboard extends Component {
     }
 
     render() {
-        const productList = this.state.products
+        const productList = this.props.inventory
             .map((p,i) => <Product key={i} name={p.name} price={p.price} img={p.img} badImage={this.handleBadImage}/>);
 
         return (

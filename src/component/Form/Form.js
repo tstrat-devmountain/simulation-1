@@ -22,11 +22,18 @@ class Form extends Component {
         price: 0
     })
 
+    postData = () => {
+        this.props.submit(this.state);
+        this.clearInput();
+    }
     
 
     render() {
         const { img, name, price } = this.state;
-        console.log({price});
+        const submitBtn = this.props.edit ? 
+            <button onClick={()=>{}}>Edit</button>:
+            <button onClick={()=> this.postData() }>Add to Inventory</button>;
+            
         return (
             <div className="form">
                 <img className="formImg" src={img} onError={e => {e.target.src = missingImage}} alt="displayed" />
@@ -37,8 +44,8 @@ class Form extends Component {
                 <h2>Price:</h2>
                 <input type="number" step="0.01" placeholder="Enter a price" value={price || ''} onChange={this.updatePrice} />
                 <div className="buttonControls">
-                    <button onClick={this.clearInput}>Clear</button>
-                    <button onClick={this.props.submit}>Submit</button>
+                    <button onClick={this.clearInput}>Cancel</button>
+                    {submitBtn}
                 </div>
             </div>
     )}

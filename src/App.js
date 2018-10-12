@@ -10,14 +10,29 @@ import Header from './component/Header/Header';
 class App extends Component {
   constructor() {
     super();
+    this.state={
+      inventory:[]
+    }
     this.submit = this.submit.bind(this);
+    this.fetchInventory = this.fetchInventory.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchInventory();
   }
 
   submit = (product) => {
     axios.post('/api/product', product)
-    .then(res => {
-        console.log("success!", res.data);
+    .then(() => {
+        this.fetchInventory();
     })
+  }
+
+  fetchInventory = () => {
+    axios.get('/api/inventory/')
+    .then(res => this.setState({
+        inventory: res.data
+    }))
   }
 
   render() {
@@ -25,7 +40,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <main>
-          <Dashboard />
+          <Dashboard inventory={this.state.inventory}/>
           <Form submit={this.submit}/>
         </main>
       </div>
