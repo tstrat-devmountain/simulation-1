@@ -1,7 +1,10 @@
 .form {
-    width: 30%;
-
-    border: 1px solid blue;
+    margin: 50px;
+    padding: 2%;
+    width: 100%;
+    max-width: 600px;
+    background-color: black;
+    color:white;
     display:flex;
     flex-direction: column;
     justify-content: center;
@@ -11,6 +14,7 @@
 .form input, .form h2, .buttonControls {
     margin:1%;
     width: 90%;
+    height: 25px;
 }
 
 .formImg {
@@ -28,4 +32,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     display:flex;
     justify-content: space-around;
     align-items: center;
+}
+
+.buttonControls button {
+    background-color: #3AD886;
 }

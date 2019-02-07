@@ -12,5 +12,29 @@
     font-size: 34px;
     font-weight: 500;
     margin: 10%;
-    font-family: 'Open Sans', sans-serif;
+}
+
+.header ul {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    min-width: 400px;
+}
+
+.header ul li > a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.header ul li > a:hover {
+    text-decoration: underline;
+    color: rgb(44, 141, 185);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.header .active {
+    color: rgb(160, 32, 160);
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import missingImage from '../../media/missing_image.png';
 import './form.css';
 class Form extends Component {
@@ -28,38 +29,6 @@ class Form extends Component {
             
         }
     }
-    componentDidUpdate = (newProps) => {
-        if (newProps !== this.props) {
-            this.clearInput();
-        }
-    }
-
-    /* Helper function for equality check of objects */
-    isEquivalent = (a, b) => {
-        // Create arrays of property names
-        var aProps = Object.getOwnPropertyNames(a);
-        var bProps = Object.getOwnPropertyNames(b);
-    
-        // If number of properties is different,
-        // objects are not equivalent
-        if (aProps.length !== bProps.length) {
-            return false;
-        }
-    
-        for (var i = 0; i < aProps.length; i++) {
-            var propName = aProps[i];
-    
-            // If values of same property are not equal,
-            // objects are not equivalent
-            if (a[propName] !== b[propName]) {
-                return false;
-            }
-        }
-    
-        // If we made it this far, objects
-        // are considered equivalent
-        return true;
-    }
 
     updateImgUrl = (e) => this.setState({img: e.target.value});
     updateProductName = (e) => this.setState({name: e.target.value});
@@ -74,7 +43,7 @@ class Form extends Component {
     postData = () => {
         axios.post('/api/product', this.state)
         .then(() => {
-            this.fetchInventory();
+            this.props.history.push('/')
         })
         this.clearInput();
     }
@@ -82,8 +51,7 @@ class Form extends Component {
     editData = (id) => {
         axios.put(`/api/product/${id}`, this.state)
         .then(() => {
-            this.setState({ selected: {}})
-            this.fetchInventory();
+            this.setState({ selected: {}});
         }
     )
         this.clearInput();
@@ -91,12 +59,11 @@ class Form extends Component {
     
 
     render() {
-        console.log('stuff', this);
         const { img, name, price } = this.state;
         const id = this.state.id > 0 ? this.state.id : undefined;
         const submitBtn = id ? 
-            <button onClick={()=>this.editData(id)}>Save Changes</button>:
-            <button onClick={()=> this.postData() }>Add to Inventory</button>;
+            <Link to='/'><button onClick={()=>this.editData(id)}>Save Changes</button></Link>:
+            <Link to='/'><button onClick={()=> this.postData() }>Add to Inventory</button></Link>;
         return (
             
             <div className="form">

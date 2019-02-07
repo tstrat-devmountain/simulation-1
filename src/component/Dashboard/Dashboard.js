@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import axios from 'axios';
 import missingImage from '../../media/missing_image.png';
-
+import './dashboard.css';
 import Product from '../Product/Product';
 
 class Dashboard extends Component {
@@ -16,6 +16,7 @@ class Dashboard extends Component {
         this.fetchInventory();
     }
 
+    
     fetchInventory = () => {
         axios.get('/api/inventory/')
         .then(res => this.setState({

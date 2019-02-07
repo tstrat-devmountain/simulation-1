@@ -8,8 +8,10 @@ export default function Header(props)  {
         <div className="header">
             <img alt="Shelfie Logo" src={shelfieIcon}/>
             <h1>SHELFIE</h1>
-            <NavLink to="/">Dashboard</NavLink>
-            <NavLink to="/add">Add Inventory</NavLink>
+            <ul>
+                <li><NavLink  exact activeClassName='active' to="/">Dashboard</NavLink></li>
+                <li><NavLink activeClassName='active' to="/add">Add Inventory</NavLink></li>
+            </ul>
         </div>
     )
 }

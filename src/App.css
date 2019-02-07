@@ -3,3 +3,7 @@ main {
     justify-content: space-around;
     align-items: center;
 }
+
+h1, h2, h3, a, button, p, article, div {
+    font-family: 'Open Sans', sans-serif;
+}
